@@ -1,0 +1,1 @@
+const BasicBtn = styled.button``;
