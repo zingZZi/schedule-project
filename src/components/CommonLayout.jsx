@@ -4,7 +4,7 @@ import Main from "../pages/Main";
 import Project from "../pages/Project";
 import MyPage from "../pages/MyPage";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 
 //content분기 처리
 function Content({ page }) {
@@ -18,7 +18,7 @@ function Content({ page }) {
   }
 }
 
-function CommonLayout({ page }) {
+function CommonLayout({ page, tokenState }) {
   const [activeNav, setActiveNav] = useState("");
   const location = useLocation().pathname.split("/")[1];
 
@@ -33,7 +33,9 @@ function CommonLayout({ page }) {
         return setActiveNav("mypage");
     }
   }, []);
-
+  if (!tokenState) {
+    return <Navigate to="/signin" replace />;
+  }
   return (
     <>
       <Header activeNav={activeNav} setActiveNav={setActiveNav} />

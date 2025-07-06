@@ -2,11 +2,14 @@ import styled from "styled-components";
 
 const FooterElem = styled.footer`
   text-align: center;
+  p {
+    color: var(--white-color-500);
+  }
 `;
 function Footer() {
   return (
     <FooterElem>
-      <p>footer영역</p>
+      <p>Timely Inc. All rights reserved. Powered by GitHub Pages.</p>
     </FooterElem>
   );
 }

@@ -264,12 +264,12 @@
       "userId": "user_021",
       "name": "테스트",
       "email": "test@test.com",
-      "password": "1234",
+      "password": "12345",
       "phone": "010-1234-5678",
       "address": "서울특별시 강남구 테헤란로 123",
-      "team": "기획",
-      "department": "기획팀",
-      "position": "기획자",
+      "team": "프론트 개발",
+      "department": "개발팀",
+      "position": "프론트엔드 개발자",
       "joinDate": "2019-03-15",
       "profileImage": "https://via.placeholder.com/150/4CAF50/FFFFFF?text=김민준"
     }

@@ -1,39 +1,67 @@
 import styled from "styled-components";
 import { PrimaryBtn } from "../components/Button";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const FromElem = styled.form`
+  max-width: 320px;
+  margin: 0 auto;
+`;
 const InputWrap = styled.div`
   position: relative;
-  margin-top: 16px;
+  margin-bottom: 16px;
+  &:last-child {
+    margin-bottom: 0;
+  }
   input {
+    font-size: var(--font-size-small);
     width: 100%;
     height: 40px;
     border-radius: 24px;
     border: 1px solid var(--white-color-500);
-    padding: 0 24px;
+    padding: 10px 40px 10px 24px;
   }
   .del {
     position: absolute;
     width: 16px;
     height: 16px;
-    background-color: pink;
+    background-color: transparent;
+    background-image: url(icon-delete.svg);
     right: 16px;
-    top: 5px;
+    top: 12px;
     font-size: 0;
     border: none;
     cursor: pointer;
   }
+
+  //오류일때
+  &.error {
+    input {
+      border: 1px solid var(--error-color);
+      color: var(--error-color);
+    }
+    p {
+      color: var(--error-color);
+      font-size: var(--font-size-small);
+      padding-left: 20px;
+      line-height: 2.1rem;
+      margin-top: 4px;
+    }
+  }
 `;
 
-function SignIn() {
+function SignIn({ setTokenState }) {
   const navigate = useNavigate();
   //input 값
-  let [emailValue, setEmailValue] = useState(undefined);
-  let [pwValue, setPwValue] = useState(undefined);
+  let [emailValue, setEmailValue] = useState("");
+  let [pwValue, setPwValue] = useState("");
   //input 오류 color
   let [emailState, setEmailtState] = useState("true");
   let [pwState, setPWtState] = useState("true");
+
+  //errorText
+  let [errorText, setErrorText] = useState("");
+
   //button 활성화 관련
   let [btnState, setbtnState] = useState(false);
   function emailCheck(e) {
@@ -44,6 +72,9 @@ function SignIn() {
   }
   function pwCheck(e) {
     setPwValue(e.target.value);
+    if (!pwState) {
+      setEmailtState(true);
+    }
   }
 
   useEffect(() => {
@@ -65,22 +96,11 @@ function SignIn() {
 
       const users = await response.json(); //전체 데이터
 
-      //위에서 체크하는게 맞는가? 아니면 !emailCheck에서 확인하는게 맞는가? & 이메일에서 .<< 이부분은 체크 안되는중 이거 어케잡지?
-      if (!emailValue.includes("@") && !emailValue.includes(".")) {
-        console.log("양식오류");
-        return;
-      }
-
-      //오류체크
-      const emailCheck = users.find((e) => e.email === emailValue);
-      const pwCheck = users.find((e) => e.password === pwValue);
-      if (!emailCheck) {
-        console.log("아이디를 확인하세요");
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(emailValue)) {
+        setErrorText("이메일 양식이 잘못되었습니다");
         setEmailtState(!emailState);
-        document.querySelector("#email").focus();
-      } else if (emailCheck && !pwCheck) {
-        console.log("비밀번호를 확인하세요");
-        document.querySelector("#pw").focus();
+        return;
       }
 
       //로그인확인
@@ -93,7 +113,20 @@ function SignIn() {
         //로컬스토리지 저장정보
         localStorage.setItem("token", fakeToken);
         localStorage.setItem("userName", user.name);
+        setTokenState(true);
         navigate("/");
+      } else {
+        //실패시 오류체크
+        const emailCheck = users.find((e) => e.email === emailValue);
+        if (!emailCheck) {
+          setErrorText("아이디를 확인하세요");
+          setEmailtState(!emailState);
+          document.querySelector("#email").focus();
+        } else if (emailCheck && emailCheck.password !== pwValue) {
+          setErrorText("비밀번호를 확인하세요");
+          setPWtState(!pwState);
+          document.querySelector("#pw").focus();
+        }
       }
     } catch (error) {
       console.error(error);
@@ -102,37 +135,62 @@ function SignIn() {
 
   //토큰관련 정보만들기
   function generateFakeToken(user) {
-    return `token_${user.id}_${Date.now()}`;
+    return `token_${user.userId}_${Date.now()}`;
+  }
+
+  function inputDel(e) {
+    const delInputId = e.target.closest("div").querySelector("input").id;
+    if (delInputId === "email") {
+      setEmailValue("");
+    } else {
+      setPwValue("");
+    }
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <InputWrap>
+    <FromElem onSubmit={handleSubmit}>
+      <InputWrap className={emailState ? null : "error"}>
         <input
+          className="test"
           type="text"
           placeholder="email"
           onChange={emailCheck}
           id="email"
-          className={emailState ? null : "error"}
+          value={emailValue}
         />
-        <button className="del icon">삭제</button>
+        {emailState ? null : <p>{errorText}</p>}
+        {emailValue ? (
+          <button type="button" className="del icon" onClick={inputDel}>
+            삭제
+          </button>
+        ) : null}
       </InputWrap>
-      <InputWrap>
+      <InputWrap className={pwState ? null : "error"}>
         <input
+          className="test"
           type="password"
           placeholder="password"
           onChange={pwCheck}
           value={pwValue}
           id="pw"
         />
-        <button className="del icon">삭제</button>
+        {pwValue ? (
+          <button type="button" className="del icon" onClick={inputDel}>
+            삭제
+          </button>
+        ) : null}
+
+        {pwState ? null : <p>{errorText}</p>}
       </InputWrap>
-      <PrimaryBtn size={"fullSize"} radius={"24"} disabled={!btnState}>
+      <PrimaryBtn
+        size={"fullSize"}
+        radius={"24"}
+        disabled={!btnState}
+        weight={"bold"}
+      >
         Login
       </PrimaryBtn>
-      <span>{emailValue}</span>
-      <span>{pwValue}</span>
-    </form>
+    </FromElem>
   );
 }
 

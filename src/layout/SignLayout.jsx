@@ -1,28 +1,49 @@
 import styled from "styled-components";
 import SignIn from "../pages/SignIn";
 import logo from "../assets/images/timely_logo_smoothed.svg";
+import Footer from "../components/Footer";
 const SignWrap = styled.main`
-  max-width: 320px;
+  min-height: 100vh;
   margin: 0 auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
 `;
 
-function Content({ page }) {
+const SignFlexCenter = styled.div`
+  width: 100%;
+`;
+
+const LogoWrap = styled.h1`
+  max-width: 150px;
+  margin: 0 auto 32px;
+  img {
+    max-width: 100%;
+  }
+`;
+
+function Content({ page, setTokenState }) {
   switch (page) {
     case "signin":
-      return <SignIn />;
+      return <SignIn setTokenState={setTokenState} />;
       break;
     case "findpw":
       return <>비번찾기</>;
       break;
   }
 }
-function SignLayout({ page }) {
+function SignLayout({ page, setTokenState }) {
   return (
     <SignWrap>
-      <h1>
-        <img src={logo} className="App-logo" alt="React" />
-      </h1>
-      <Content page={page} />
+      <SignFlexCenter>
+        <LogoWrap>
+          <img src={logo} className="App-logo" alt="timely" />
+        </LogoWrap>
+        <Content page={page} setTokenState={setTokenState} />
+      </SignFlexCenter>
+
+      <Footer />
     </SignWrap>
   );
 }

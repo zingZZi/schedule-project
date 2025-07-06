@@ -7,6 +7,8 @@ const BasicBtn = styled.button`
   margin: 0;
   padding: 10px 20px;
   border-radius: ${(props) => (props.radius ? `${props.radius}px` : 0)};
+  font-weight: ${(props) => (props.weight === "bold" ? "700" : "400")};
+  cursor: pointer;
   &:disabled {
     background-color: var(--white-color-500);
     border: none;

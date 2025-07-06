@@ -1,9 +1,10 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import CommonLayout from "./components/CommonLayout";
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 import SignLayout from "./layout/SignLayout";
 import "./assets/font/font.css";
+import { useEffect, useRef, useState } from "react";
 
 function App() {
   const GlobalStyle = createGlobalStyle`
@@ -14,9 +15,12 @@ function App() {
     html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, menu, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, main, menu, nav, output, ruby, section, summary, time, mark, audio, video {
       font-family: "Roboto";
     }
+    html{
+      font-size: 10px;
+    }
     :root {
         --primary-color: #EBAD2E;
-        --secondary-red-color: #ed1d24;
+        --error-color: #FF2D2D;
 
         --white-color-100: #fff;
         --white-color-200: #F2F2F2;
@@ -28,11 +32,13 @@ function App() {
         
         --black-color: #000000;
         
-        --font-size-title: 4rem;
-        --font-size-large: 2.8rem;
-        --font-size-medium: 2.2rem;
-        --font-size-small: 2rem;
-        --font-size-primary: 1.6rem;
+        
+        --font-size-base: 1.6rem; //16px
+        --font-size-small: 1.4rem;
+    }
+    body{
+      min-width: 320px;
+      font-size:var(--font-size-small)
     }
     li{
       list-style: none;
@@ -50,18 +56,32 @@ function App() {
       margin:0 auto;
     }
   `;
+
+  const localToken = localStorage.getItem("token");
+  const [tokenState, setTokenState] = useState(localToken);
+
   return (
     <>
       <GlobalStyle />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<CommonLayout page="index" />} />
-          <Route path="/project" element={<CommonLayout page="project" />} />
-          <Route path="/mypage" element={<CommonLayout page="mypage" />} />
-          <Route path="/signin" element={<SignLayout page="signin" />} />
-          <Route path="/findpw" element={<SignLayout page="findpw" />} />
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={<CommonLayout page="index" tokenState={tokenState} />}
+        />
+        <Route
+          path="/project"
+          element={<CommonLayout page="project" tokenState={tokenState} />}
+        />
+        <Route
+          path="/mypage"
+          element={<CommonLayout page="mypage" tokenState={tokenState} />}
+        />
+        <Route
+          path="/signin"
+          element={<SignLayout page="signin" setTokenState={setTokenState} />}
+        />
+        <Route path="/findpw" element={<SignLayout page="findpw" />} />
+      </Routes>
     </>
   );
 }
