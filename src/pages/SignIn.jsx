@@ -50,7 +50,7 @@ const InputWrap = styled.div`
   }
 `;
 
-function SignIn({ setTokenState }) {
+function SignIn({ setTokenState, setUserInfo }) {
   const navigate = useNavigate();
   //input 값
   let [emailValue, setEmailValue] = useState("");
@@ -110,10 +110,19 @@ function SignIn({ setTokenState }) {
       if (user) {
         //로그인 한사람 정보
         const fakeToken = generateFakeToken(user);
+
         //로컬스토리지 저장정보
         localStorage.setItem("token", fakeToken);
-        localStorage.setItem("userName", user.name);
+        localStorage.setItem("name", user.name);
+        localStorage.setItem("profileImage", user.profileImage);
+        localStorage.setItem("email", user.email);
+
         setTokenState(true);
+        setUserInfo({
+          name: user.name,
+          profileImage: user.profileImage,
+          email: user.email,
+        });
         navigate("/");
       } else {
         //실패시 오류체크

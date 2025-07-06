@@ -1,7 +1,7 @@
 import { Routes, Route, useLocation } from "react-router-dom";
-import CommonLayout from "./components/CommonLayout";
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
+import CommonLayout from "./layout/CommonLayout";
 import SignLayout from "./layout/SignLayout";
 import "./assets/font/font.css";
 import { useEffect, useRef, useState } from "react";
@@ -47,6 +47,9 @@ function App() {
       text-decoration: none;
       color:inherit
     }
+    img{
+      max-width: 100%;
+    }
     .text-ir{
       font-size: 0%;
       text-indent:-99999px;
@@ -59,7 +62,13 @@ function App() {
 
   const localToken = localStorage.getItem("token");
   const [tokenState, setTokenState] = useState(localToken);
-
+  const [userInfo, setUserInfo] = useState({
+    name: localStorage.getItem("name") || "",
+    profileImage: localStorage.getItem("profileImage") || "",
+    email: localStorage.getItem("email") || "",
+  });
+  console.log(userInfo);
+  //userInfo useContext로 전달법 작업해야함
   return (
     <>
       <GlobalStyle />
@@ -78,7 +87,13 @@ function App() {
         />
         <Route
           path="/signin"
-          element={<SignLayout page="signin" setTokenState={setTokenState} />}
+          element={
+            <SignLayout
+              page="signin"
+              setTokenState={setTokenState}
+              setUserInfo={setUserInfo}
+            />
+          }
         />
         <Route path="/findpw" element={<SignLayout page="findpw" />} />
       </Routes>
