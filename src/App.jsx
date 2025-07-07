@@ -86,6 +86,10 @@ function App() {
           element={<CommonLayout page="mypage" tokenState={tokenState} />}
         />
         <Route
+          path="/write"
+          element={<CommonLayout page="mypage" tokenState={tokenState} />}
+        />
+        <Route
           path="/signin"
           element={
             <SignLayout
