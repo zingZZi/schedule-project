@@ -5,6 +5,7 @@ import CommonLayout from "./layout/CommonLayout";
 import SignLayout from "./layout/SignLayout";
 import "./assets/font/font.css";
 import { useEffect, useRef, useState } from "react";
+import { LoginStateProvider } from "./provider/LoginStateProvider";
 
 function App() {
   const GlobalStyle = createGlobalStyle`
@@ -47,6 +48,9 @@ function App() {
       text-decoration: none;
       color:inherit
     }
+    button{
+      padding:0;
+    }
     img{
       max-width: 100%;
     }
@@ -62,45 +66,35 @@ function App() {
 
   const localToken = localStorage.getItem("token");
   const [tokenState, setTokenState] = useState(localToken);
-  const [userInfo, setUserInfo] = useState({
-    name: localStorage.getItem("name") || "",
-    profileImage: localStorage.getItem("profileImage") || "",
-    email: localStorage.getItem("email") || "",
-  });
-  console.log(userInfo);
   //userInfo useContext로 전달법 작업해야함
   return (
     <>
       <GlobalStyle />
-      <Routes>
-        <Route
-          path="/"
-          element={<CommonLayout page="index" tokenState={tokenState} />}
-        />
-        <Route
-          path="/project"
-          element={<CommonLayout page="project" tokenState={tokenState} />}
-        />
-        <Route
-          path="/mypage"
-          element={<CommonLayout page="mypage" tokenState={tokenState} />}
-        />
-        <Route
-          path="/write"
-          element={<CommonLayout page="mypage" tokenState={tokenState} />}
-        />
-        <Route
-          path="/signin"
-          element={
-            <SignLayout
-              page="signin"
-              setTokenState={setTokenState}
-              setUserInfo={setUserInfo}
-            />
-          }
-        />
-        <Route path="/findpw" element={<SignLayout page="findpw" />} />
-      </Routes>
+      <LoginStateProvider>
+        <Routes>
+          <Route
+            path="/"
+            element={<CommonLayout page="index" tokenState={tokenState} />}
+          />
+          <Route
+            path="/project"
+            element={<CommonLayout page="project" tokenState={tokenState} />}
+          />
+          <Route
+            path="/mypage"
+            element={<CommonLayout page="mypage" tokenState={tokenState} />}
+          />
+          <Route
+            path="/write"
+            element={<CommonLayout page="mypage" tokenState={tokenState} />}
+          />
+          <Route
+            path="/signin"
+            element={<SignLayout page="signin" setTokenState={setTokenState} />}
+          />
+          <Route path="/findpw" element={<SignLayout page="findpw" />} />
+        </Routes>
+      </LoginStateProvider>
     </>
   );
 }

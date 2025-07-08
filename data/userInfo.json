@@ -11,7 +11,7 @@
       "department": "기획팀",
       "position": "기획자",
       "joinDate": "2019-03-15",
-      "profileImage": "https://via.placeholder.com/150/4CAF50/FFFFFF?text=김민준"
+      "profileImage": "https://api.wenivops.co.kr/services/open-market/media/products/2025/05/08/img_4.png"
     },
     {
       "userId": "user_002",
@@ -24,7 +24,7 @@
       "department": "개발팀",
       "position": "프론트엔드 개발자",
       "joinDate": "2018-07-22",
-      "profileImage": "https://via.placeholder.com/150/FF9800/FFFFFF?text=이서윤"
+      "profileImage": "https://api.wenivops.co.kr/services/open-market/media/products/2025/05/08/img_4.png"
     },
     {
       "userId": "user_003",
@@ -37,7 +37,7 @@
       "department": "디자인팀",
       "position": "UI/UX 디자이너",
       "joinDate": "2019-11-08",
-      "profileImage": "https://via.placeholder.com/150/2196F3/FFFFFF?text=박지호"
+      "profileImage": "https://api.wenivops.co.kr/services/open-market/media/products/2025/05/08/img_4.png"
     },
     {
       "userId": "user_004",
@@ -50,7 +50,7 @@
       "department": "개발팀",
       "position": "백엔드 개발자",
       "joinDate": "2018-12-03",
-      "profileImage": "https://via.placeholder.com/150/E91E63/FFFFFF?text=정수빈"
+      "profileImage": "https://api.wenivops.co.kr/services/open-market/media/products/2025/05/08/img_4.png"
     },
     {
       "userId": "user_005",
@@ -63,7 +63,7 @@
       "department": "기획팀",
       "position": "프로덕트 기획자",
       "joinDate": "2019-06-17",
-      "profileImage": "https://via.placeholder.com/150/9C27B0/FFFFFF?text=최예준"
+      "profileImage": "https://api.wenivops.co.kr/services/open-market/media/products/2025/05/08/img_4.png"
     },
     {
       "userId": "user_006",
@@ -76,7 +76,7 @@
       "department": "개발팀",
       "position": "프론트엔드 개발자",
       "joinDate": "2019-01-14",
-      "profileImage": "https://via.placeholder.com/150/795548/FFFFFF?text=한시우"
+      "profileImage": "https://api.wenivops.co.kr/services/open-market/media/products/2025/05/08/img_4.png"
     },
     {
       "userId": "user_007",
@@ -89,7 +89,7 @@
       "department": "디자인팀",
       "position": "그래픽 디자이너",
       "joinDate": "2018-09-25",
-      "profileImage": "https://via.placeholder.com/150/607D8B/FFFFFF?text=오하린"
+      "profileImage": "https://api.wenivops.co.kr/services/open-market/media/products/2025/05/08/img_4.png"
     },
     {
       "userId": "user_008",
@@ -102,7 +102,7 @@
       "department": "개발팀",
       "position": "백엔드 개발자",
       "joinDate": "2019-04-11",
-      "profileImage": "https://via.placeholder.com/150/FF5722/FFFFFF?text=임도윤"
+      "profileImage": "https://api.wenivops.co.kr/services/open-market/media/products/2025/05/08/img_4.png"
     },
     {
       "userId": "user_009",
@@ -115,7 +115,7 @@
       "department": "기획팀",
       "position": "비즈니스 기획자",
       "joinDate": "2018-11-30",
-      "profileImage": "https://via.placeholder.com/150/009688/FFFFFF?text=장서현"
+      "profileImage": "https://api.wenivops.co.kr/services/open-market/media/products/2025/05/08/img_4.png"
     },
     {
       "userId": "user_010",
@@ -128,7 +128,7 @@
       "department": "개발팀",
       "position": "프론트엔드 개발자",
       "joinDate": "2019-08-05",
-      "profileImage": "https://via.placeholder.com/150/3F51B5/FFFFFF?text=윤준서"
+      "profileImage": "https://api.wenivops.co.kr/services/open-market/media/products/2025/05/08/img_4.png"
     },
     {
       "userId": "user_011",
@@ -141,7 +141,7 @@
       "department": "디자인팀",
       "position": "브랜드 디자이너",
       "joinDate": "2019-02-20",
-      "profileImage": "https://via.placeholder.com/150/8BC34A/FFFFFF?text=강민서"
+      "profileImage": "https://api.wenivops.co.kr/services/open-market/media/products/2025/05/08/img_4.png"
     },
     {
       "userId": "user_012",
@@ -219,7 +219,7 @@
       "department": "기획팀",
       "position": "마케팅 기획자",
       "joinDate": "2019-12-18",
-      "profileImage": "https://via.placeholder.com/150/4CAF50/FFFFFF?text=문서진"
+      "profileImage": "문서진"
     },
     {
       "userId": "user_018",
@@ -271,7 +271,7 @@
       "department": "개발팀",
       "position": "프론트엔드 개발자",
       "joinDate": "2019-03-15",
-      "profileImage": "https://via.placeholder.com/150/4CAF50/FFFFFF?text=김민준"
+      "profileImage": ""
     }
   ]
 }

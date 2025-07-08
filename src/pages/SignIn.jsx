@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { PrimaryBtn } from "../components/Button";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useLoginState } from "../provider/LoginStateProvider";
 
 const FromElem = styled.form`
   max-width: 320px;
@@ -51,6 +52,7 @@ const InputWrap = styled.div`
 `;
 
 function SignIn({ setTokenState, setUserInfo }) {
+  const { loginUserInfoSave } = useLoginState();
   const navigate = useNavigate();
   //input 값
   let [emailValue, setEmailValue] = useState("");
@@ -113,16 +115,9 @@ function SignIn({ setTokenState, setUserInfo }) {
 
         //로컬스토리지 저장정보
         localStorage.setItem("token", fakeToken);
-        localStorage.setItem("name", user.name);
-        localStorage.setItem("profileImage", user.profileImage);
-        localStorage.setItem("email", user.email);
-
+        localStorage.setItem("uerInfo", JSON.stringify(user));
         setTokenState(true);
-        setUserInfo({
-          name: user.name,
-          profileImage: user.profileImage,
-          email: user.email,
-        });
+        loginUserInfoSave(user);
         navigate("/");
       } else {
         //실패시 오류체크

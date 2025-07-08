@@ -23,28 +23,24 @@ const LogoWrap = styled.h1`
   }
 `;
 
-function Content({ page, setTokenState, setUserInfo }) {
+function Content({ page, setTokenState }) {
   switch (page) {
     case "signin":
-      return <SignIn setTokenState={setTokenState} setUserInfo={setUserInfo} />;
+      return <SignIn setTokenState={setTokenState} />;
       break;
     case "findpw":
       return <>비번찾기</>;
       break;
   }
 }
-function SignLayout({ page, setTokenState, setUserInfo }) {
+function SignLayout({ page, setTokenState }) {
   return (
     <SignWrap>
       <SignFlexCenter>
         <LogoWrap>
           <img src={logo} className="App-logo" alt="timely" />
         </LogoWrap>
-        <Content
-          page={page}
-          setTokenState={setTokenState}
-          setUserInfo={setUserInfo}
-        />
+        <Content page={page} setTokenState={setTokenState} />
       </SignFlexCenter>
 
       <Footer />
