@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { PrimaryBtn } from "../components/Button";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useLoginState } from "../provider/LoginStateProvider";
+import { useLoginState } from "../Context/LoginStateProvider";
 
 const FromElem = styled.form`
   max-width: 320px;

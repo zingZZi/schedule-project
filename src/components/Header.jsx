@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useState } from "react";
-import { useLoginState } from "../provider/LoginStateProvider";
+import { useLoginState } from "../Context/LoginStateProvider";
 import logo from "../assets/images/timely_logo_smoothed.svg";
 import userIcon from "../assets/images/basic-user-icon.svg";
 

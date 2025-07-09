@@ -5,7 +5,7 @@ import CommonLayout from "./layout/CommonLayout";
 import SignLayout from "./layout/SignLayout";
 import "./assets/font/font.css";
 import { useEffect, useRef, useState } from "react";
-import { LoginStateProvider } from "./provider/LoginStateProvider";
+import { LoginStateProvider } from "./Context/LoginStateProvider";
 
 function App() {
   const GlobalStyle = createGlobalStyle`
