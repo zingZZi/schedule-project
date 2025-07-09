@@ -1,27 +1,51 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import PageNav from "../components/PageNav";
-
+import CustomnSelectBox from "../components/CustomSelectBox";
+import { useSelectHook } from "../hooks/useSelectHook";
+import { useEffect, useMemo, useState } from "react";
 const ProjectListFilter = styled.form``;
 function Project() {
+  //커스텀 탭 관련 정보
+  const lists = ["전체", "기획", "디자인", "프론트엔드", "백엔드"];
+  const { toggle, isOpen, selectedText, listSelect } = useSelectHook({
+    type: "filter",
+    defaultText: "전체",
+  });
+
+  const [postList, setPostList] = useState([]);
+  useEffect(() => {
+    const projectList = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/posts");
+        if (!response.ok) {
+          console.log(에러라우);
+          return;
+        }
+
+        const projectLists = await response.json();
+        setPostList(projectLists);
+        setFilteredPostList(projectLists);
+      } catch (error) {}
+    };
+    projectList();
+  }, []);
+  const filteredPostList = useMemo(() => {
+    return selectedText === "전체"
+      ? postList
+      : postList.filter((e) => e.category === selectedText);
+  }, [postList, selectedText]);
   return (
     <section className="container">
       <h2 className="text-ir">프로젝트</h2>
       <ProjectListFilter>
-        <div className="category-filter">
-          <span>전체</span>
-          <ul>
-            <li>
-              <span>전체</span>
-            </li>
-            <li>
-              <span>전체</span>
-            </li>
-            <li>
-              <span>전체</span>
-            </li>
-          </ul>
-        </div>
+        <CustomnSelectBox
+          lists={lists}
+          toggle={toggle}
+          isOpen={isOpen}
+          selectedText={selectedText}
+          listSelect={listSelect}
+        />
         <>
           <Link to="/write">작성하기</Link>
           <input type="text" />
@@ -30,15 +54,13 @@ function Project() {
       </ProjectListFilter>
 
       <ul>
-        <li>
-          <a href="">
-            <span>[조직]</span>글제목
-          </a>
-          <p>
-            <span className="date">2025.07.07</span>
-            <span className="writer">작성자 이름</span>
-          </p>
-        </li>
+        {filteredPostList.map((e) => {
+          return (
+            <li key={e.id}>
+              <p>{e.title}</p>
+            </li>
+          );
+        })}
       </ul>
 
       <PageNav />

@@ -50,6 +50,8 @@ function App() {
     }
     button{
       padding:0;
+      background-color: transparent;
+      border:none;
     }
     img{
       max-width: 100%;
