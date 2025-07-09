@@ -1,13 +1,12 @@
 import styled from "styled-components";
-
+const PageNation = styled.div`
+  display: flex;
+`;
+const Btn = styled.button`
+  width: 40px;
+  height: 40px;
+`;
 function PageNav() {
-  const PageNation = styled.div`
-    display: flex;
-  `;
-  const Btn = styled.button`
-    width: 40px;
-    height: 40px;
-  `;
   return (
     <PageNation>
       <Btn>이전페이지 이동</Btn>
