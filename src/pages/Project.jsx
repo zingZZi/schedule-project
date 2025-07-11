@@ -4,7 +4,9 @@ import PageNav from "../components/PageNav";
 import CustomnSelectBox from "../components/CustomSelectBox";
 import { useSelectHook } from "../hooks/useSelectHook";
 import { useEffect, useMemo, useState } from "react";
+import PrjoectList from "../components/ProjectList";
 const ProjectListFilter = styled.form``;
+
 function Project() {
   //커스텀 탭 관련 정보
   const lists = ["전체", "기획", "디자인", "프론트엔드", "백엔드"];
@@ -12,7 +14,6 @@ function Project() {
     type: "filter",
     defaultText: "전체",
   });
-
   const [postList, setPostList] = useState([]);
   useEffect(() => {
     const projectList = async () => {
@@ -55,11 +56,7 @@ function Project() {
 
       <ul>
         {filteredPostList.map((e) => {
-          return (
-            <li key={e.id}>
-              <p>{e.title}</p>
-            </li>
-          );
+          return <PrjoectList title={e.title} key={e.id} />;
         })}
       </ul>
 
