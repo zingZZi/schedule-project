@@ -3,7 +3,6 @@ import { PrimaryBtn } from "../components/Button";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLoginState } from "../Context/LoginStateProvider";
-import { useAuth } from "../hooks/useAuth";
 
 const FromElem = styled.form`
   max-width: 320px;
@@ -52,9 +51,8 @@ const InputWrap = styled.div`
   }
 `;
 
-function SignIn() {
+function SignIn({ setTokenState, setUserInfo }) {
   const { loginUserInfoSave } = useLoginState();
-  const { user, login } = useAuth();
   const navigate = useNavigate();
   //input 값
   let [emailValue, setEmailValue] = useState("");
@@ -93,27 +91,49 @@ function SignIn() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const response = await fetch("http://localhost:3000/users");
+      if (!response.ok) {
+        throw new Error("네크워크응답에 문제있음");
+      }
+
+      const users = await response.json(); //전체 데이터
+
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(emailValue)) {
         setErrorText("이메일 양식이 잘못되었습니다");
         setEmailtState(!emailState);
         return;
       }
-      const loginCheck = await login(emailValue, pwValue);
-    } catch (error) {
-      //아이디 틀렸을때
-      console.log(error);
-      if (error.message.includes("이메일")) {
-        setErrorText("아이디를 확인하세요");
-        setEmailtState(false);
-        setPWtState(true);
-        document.querySelector("#email").focus();
+
+      //로그인확인
+      const user = users.find(
+        (e) => e.email === emailValue && e.password === pwValue
+      );
+      if (user) {
+        //로그인 한사람 정보
+        const fakeToken = generateFakeToken(user);
+
+        //로컬스토리지 저장정보
+        localStorage.setItem("token", fakeToken);
+        localStorage.setItem("uerInfo", JSON.stringify(user));
+        setTokenState(true);
+        loginUserInfoSave(user);
+        navigate("/");
       } else {
-        setErrorText("비밀번호를 확인하세요");
-        setEmailtState(true);
-        setPWtState(false);
-        document.querySelector("#pw").focus();
+        //실패시 오류체크
+        const emailCheck = users.find((e) => e.email === emailValue);
+        if (!emailCheck) {
+          setErrorText("아이디를 확인하세요");
+          setEmailtState(!emailState);
+          document.querySelector("#email").focus();
+        } else if (emailCheck && emailCheck.password !== pwValue) {
+          setErrorText("비밀번호를 확인하세요");
+          setPWtState(!pwState);
+          document.querySelector("#pw").focus();
+        }
       }
+    } catch (error) {
+      console.error(error);
     }
   };
 
