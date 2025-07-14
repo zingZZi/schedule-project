@@ -5,6 +5,7 @@ import Project from "../pages/Project";
 import MyPage from "../pages/MyPage";
 import { useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 
 //content분기 처리
 function Content({ page }) {
@@ -18,9 +19,13 @@ function Content({ page }) {
   }
 }
 
-function CommonLayout({ page, tokenState }) {
+function CommonLayout({ page }) {
   const [activeNav, setActiveNav] = useState("");
   const location = useLocation().pathname.split("/")[1];
+
+  const { user } = useAuth();
+
+  console.log(user);
 
   //처음 로딩시 activNav 설정
   useEffect(() => {
@@ -32,8 +37,9 @@ function CommonLayout({ page, tokenState }) {
       case "mypage":
         return setActiveNav("mypage");
     }
-  }, []);
-  if (!tokenState) {
+  }, [location]);
+
+  if (!user) {
     return <Navigate to="/signin" replace />;
   }
   return (

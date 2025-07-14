@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { PrimaryBtn } from "../components/Button";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useLoginState } from "../Context/LoginStateProvider";
 import { useAuth } from "../hooks/useAuth";
 
 const FromElem = styled.form`
@@ -53,21 +52,17 @@ const InputWrap = styled.div`
 `;
 
 function SignIn() {
-  const { loginUserInfoSave } = useLoginState();
-  const { user, login } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
-  //input 값
+
+  //login useState
   let [emailValue, setEmailValue] = useState("");
   let [pwValue, setPwValue] = useState("");
-  //input 오류 color
   let [emailState, setEmailtState] = useState("true");
   let [pwState, setPWtState] = useState("true");
-
-  //errorText
   let [errorText, setErrorText] = useState("");
-
-  //button 활성화 관련
   let [btnState, setbtnState] = useState(false);
+
   function emailCheck(e) {
     setEmailValue(e.target.value);
     if (!emailState) {
@@ -77,10 +72,11 @@ function SignIn() {
   function pwCheck(e) {
     setPwValue(e.target.value);
     if (!pwState) {
-      setEmailtState(true);
+      setPWtState(true);
     }
   }
 
+  //button 활성화 관련
   useEffect(() => {
     if (emailValue && pwValue && !btnState) {
       setbtnState(true);
@@ -99,10 +95,12 @@ function SignIn() {
         setEmailtState(!emailState);
         return;
       }
-      const loginCheck = await login(emailValue, pwValue);
+      const user = await login(emailValue, pwValue);
+      if (user) {
+        navigate("/");
+      }
     } catch (error) {
       //아이디 틀렸을때
-      console.log(error);
       if (error.message.includes("이메일")) {
         setErrorText("아이디를 확인하세요");
         setEmailtState(false);

@@ -6,7 +6,8 @@ function generateFakeToken(user) {
 }
 
 export function useAuth() {
-  const [user, setUser] = useState(null);
+  const savedUserInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const [user, setUser] = useState(savedUserInfo ? savedUserInfo : null);
 
   const login = async (email, password) => {
     const response = await fetch("http://localhost:3000/users");
@@ -34,10 +35,10 @@ export function useAuth() {
     const fakeToken = generateFakeToken(user);
     //로컬스토리지 저장정보
     localStorage.setItem("token", fakeToken);
-    localStorage.setItem("uerInfo", JSON.stringify(user));
+    localStorage.setItem("userInfo", JSON.stringify(user));
     setUser(user);
     return user;
   };
 
-  return { user, login };
+  return { user, login, savedUserInfo };
 }

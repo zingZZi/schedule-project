@@ -20,7 +20,6 @@ function Project() {
       try {
         const response = await fetch("http://localhost:3000/posts");
         if (!response.ok) {
-          console.log(에러라우);
           return;
         }
 

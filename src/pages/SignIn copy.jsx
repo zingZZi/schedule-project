@@ -115,7 +115,7 @@ function SignIn({ setTokenState, setUserInfo }) {
 
         //로컬스토리지 저장정보
         localStorage.setItem("token", fakeToken);
-        localStorage.setItem("uerInfo", JSON.stringify(user));
+        localStorage.setItem("userInfo", JSON.stringify(user));
         setTokenState(true);
         loginUserInfoSave(user);
         navigate("/");
