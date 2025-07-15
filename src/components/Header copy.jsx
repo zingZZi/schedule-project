@@ -1,11 +1,9 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { useContext, useState } from "react";
+import { useState } from "react";
+import { useLoginState } from "../Context/LoginStateProvider";
 import logo from "../assets/images/timely_logo_smoothed.svg";
 import userIcon from "../assets/images/basic-user-icon.svg";
-import { useActiveGnb } from "../hooks/useActiveGnb";
-import { useAuth } from "../hooks/useAuth";
-import { AuthContent } from "../Context/AuthProvider";
 
 const HeaderElem = styled.header`
   padding: 20px 0;
@@ -96,12 +94,11 @@ const LinkNav = styled.ul`
   }
 `;
 
-function Header() {
-  //경로 확인
-  const { location } = useActiveGnb();
-
-  //login userData
-  const { user } = useContext(AuthContent);
+function Header({ activeNav, setActiveNav }) {
+  const { loginUserInfo } = useLoginState();
+  function gnbFnc(e) {
+    setActiveNav(e.target.dataset.link);
+  }
   const [userInfoState, setUserInfoState] = useState(false);
   function openUserBox() {
     setUserInfoState(!userInfoState);
@@ -119,21 +116,24 @@ function Header() {
             <Link
               to="/"
               data-link="index"
-              className={location === "" ? "on" : ""}
+              onClick={gnbFnc}
+              className={activeNav === "index" ? "on" : ""}
             >
               스케쥴
             </Link>
             <Link
               to="/project"
               data-link="project"
-              className={location === "project" ? "on" : ""}
+              onClick={gnbFnc}
+              className={activeNav === "project" ? "on" : ""}
             >
               프로젝트
             </Link>
             <Link
               to="/mypage"
               data-link="mypage"
-              className={location === "mypage" ? "on" : ""}
+              onClick={gnbFnc}
+              className={activeNav === "mypage" ? "on" : ""}
             >
               마이페이지
             </Link>
@@ -147,16 +147,16 @@ function Header() {
           <h2 className="text-ir">상단 회원정보</h2>
           <UserInfo>
             <img
-              src={user.profileImage || userIcon}
+              src={loginUserInfo.profileImage || userIcon}
               onError={(e) => {
                 e.target.src = userIcon;
               }}
               alt="프로필이미지"
             />
             <p>
-              <span>{user.name}</span>
+              <span>{loginUserInfo.name}</span>
               {userInfoState ? (
-                <span className="email">{user.email}</span>
+                <span className="email">{loginUserInfo.email}</span>
               ) : null}
             </p>
           </UserInfo>

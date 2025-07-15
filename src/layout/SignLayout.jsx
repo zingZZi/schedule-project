@@ -23,24 +23,24 @@ const LogoWrap = styled.h1`
   }
 `;
 
-function Content({ page, setTokenState }) {
+function Content({ page }) {
   switch (page) {
     case "signin":
-      return <SignIn setTokenState={setTokenState} />;
+      return <SignIn />;
       break;
     case "findpw":
       return <>비번찾기</>;
       break;
   }
 }
-function SignLayout({ page, setTokenState }) {
+function SignLayout({ page }) {
   return (
     <SignWrap>
       <SignFlexCenter>
         <LogoWrap>
           <img src={logo} className="App-logo" alt="timely" />
         </LogoWrap>
-        <Content page={page} setTokenState={setTokenState} />
+        <Content page={page} />
       </SignFlexCenter>
 
       <Footer />

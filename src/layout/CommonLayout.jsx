@@ -3,9 +3,10 @@ import Footer from "../components/Footer";
 import Main from "../pages/Main";
 import Project from "../pages/Project";
 import MyPage from "../pages/MyPage";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import { AuthContent } from "../Context/AuthProvider";
 
 //content분기 처리
 function Content({ page }) {
@@ -20,14 +21,8 @@ function Content({ page }) {
 }
 
 function CommonLayout({ page }) {
-  const [activeNav, setActiveNav] = useState("");
-  const location = useLocation().pathname.split("/")[1];
-
-  const { user } = useAuth();
-
-  console.log(user);
-
-  //처음 로딩시 activNav 설정
+  const { user } = useContext(AuthContent);
+  //처음 로딩시 activNav 설정;
   useEffect(() => {
     switch (location) {
       case "":
@@ -44,7 +39,7 @@ function CommonLayout({ page }) {
   }
   return (
     <>
-      <Header activeNav={activeNav} setActiveNav={setActiveNav} />
+      <Header />
       <Content page={page} />
       <Footer />
     </>
