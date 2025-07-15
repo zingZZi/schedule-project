@@ -3,7 +3,7 @@ import styled from "styled-components";
 const BasicBtn = styled.button`
   background-color: none;
   border: 1px solid var(--black-color);
-  width: ${(props) => (props.size === "fullSize" ? "100%" : auto)};
+  width: ${(props) => (props.size === "fullSize" ? "100%" : "auto")};
   margin: 0;
   padding: 10px 20px;
   border-radius: ${(props) => (props.radius ? `${props.radius}px` : 0)};
@@ -22,4 +22,11 @@ const PrimaryBtn = styled(BasicBtn)`
   margin-top: 40px;
   color: var(--white-color-100);
 `;
-export { BasicBtn, PrimaryBtn };
+
+const PrimaryLineBtn = styled(BasicBtn)`
+  background-color: var(--white-color-100);
+  border: 1px solid var(--primary-color);
+  height: 40px;
+  color: var(--white-color-100);
+`;
+export { BasicBtn, PrimaryBtn, PrimaryLineBtn };
