@@ -4,10 +4,14 @@ const AuthContent = createContext();
 function generateFakeToken(user) {
   return `token_${user.userId}_${Date.now()}`;
 }
+
+const localStorageInfo = () => {
+  return JSON.parse(localStorage.getItem("userInfo")) || null;
+};
+
 function AuthProvider({ children }) {
   const [user, setUser] = useState(() => {
-    const savedUserInfo = JSON.parse(localStorage.getItem("userInfo"));
-    return savedUserInfo || null;
+    return localStorageInfo();
   });
 
   const login = async (email, password) => {
