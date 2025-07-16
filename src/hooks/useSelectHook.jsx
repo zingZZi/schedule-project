@@ -1,11 +1,24 @@
-import { useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 export function useSelectHook({ type, defaultText }) {
+  const componentRef = useRef("null");
   let [isOpen, setIsOpen] = useState(false);
   const [selectedText, setSelectedText] = useState(defaultText);
+
+  useLayoutEffect(() => {
+    function outStideClick(e) {
+      if (componentRef.current && !componentRef.current.contains(e.target)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", outStideClick);
+    return () => {
+      document.removeEventListener("mousedown", outStideClick);
+    };
+  }, []);
+
   const toggle = () => {
     setIsOpen(!isOpen);
-    console.log(defaultText);
   };
 
   const listSelect = (e) => {
@@ -24,5 +37,6 @@ export function useSelectHook({ type, defaultText }) {
     isOpen,
     selectedText,
     listSelect,
+    componentRef,
   };
 }

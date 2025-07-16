@@ -36,9 +36,16 @@ const CustomDropDown = styled.ul`
   }
 `;
 
-function CustomnSelectBox({ lists, toggle, isOpen, selectedText, listSelect }) {
+function CustomnSelectBox({
+  lists,
+  toggle,
+  isOpen,
+  selectedText,
+  listSelect,
+  componentRef,
+}) {
   return (
-    <SelectBox>
+    <SelectBox ref={componentRef}>
       <SlectedText onClick={toggle} type="button">
         {selectedText}
       </SlectedText>
