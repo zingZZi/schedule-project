@@ -14,6 +14,19 @@ const FieldElem = styled.form`
     width: 100%;
     input {
       width: 100%;
+      border: 1px solid var(--white-color-500);
+      height: 40px;
+      padding: 0 22px;
+      border-radius: 40px;
+    }
+    button {
+      position: absolute;
+      right: 15px;
+      top: 5px;
+      width: 29px;
+      height: 29px;
+      border: none;
+      background: pink;
     }
   }
   a {
@@ -39,11 +52,9 @@ function SearchForm() {
   const [inpTxt, setInpTxt] = useState("");
   //버튼 기능설정
   const formBtnFnc = (e) => {
-    e.preventDefault();
     if (e.target.type === "button") {
+      e.preventDefault();
       setFormBtnState("submit");
-    } else {
-      console.log("action 실행");
     }
   };
   //
@@ -58,15 +69,28 @@ function SearchForm() {
     }
     document.addEventListener("mousedown", InputCloseFnc);
   }, []);
+
+  function seachSubmit(e) {
+    e.preventDefault();
+    console.log(inpTxt);
+  }
+
   return (
     <FieldElem
+      onSubmit={seachSubmit}
       ref={seachRef}
       className={formBtnState === "submit" ? "submit-form" : null}
     >
-      <legend className="text-ir">검색입력창</legend>
       {formBtnState === "button" ? <Link to="/write">작성하기</Link> : null}
       {formBtnState === "button" ? null : (
-        <input type="text" placeholder="제목,작성자로 검색" />
+        <input
+          type="text"
+          placeholder="제목,작성자로 검색"
+          value={inpTxt}
+          onChange={(e) => {
+            setInpTxt(e.target.value);
+          }}
+        />
       )}
       <BasicBtn type={formBtnState} className="text-ir" onClick={formBtnFnc}>
         검색

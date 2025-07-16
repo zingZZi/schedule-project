@@ -6,7 +6,7 @@ const SelectBox = styled.div`
 const SlectedText = styled.button`
   padding: 0 24px;
   font-size: 1.6rem;
-  height: 2.4rem;
+  height: 32px;
 `;
 const CustomDropDown = styled.ul`
   padding: 5px;

@@ -11,8 +11,6 @@ const ProjectListFilter = styled.section`
   justify-content: space-between;
   position: relative;
   margin-bottom: 16px;
-  fieldset {
-  }
 `;
 
 function Project() {
@@ -49,6 +47,7 @@ function Project() {
   return (
     <section className="container">
       <h2 className="text-ir">프로젝트</h2>
+
       <ProjectListFilter>
         <CustomnSelectBox
           lists={lists}
@@ -58,6 +57,7 @@ function Project() {
           listSelect={listSelect}
           componentRef={componentRef}
         />
+
         <SearchForm />
       </ProjectListFilter>
       <ul>
