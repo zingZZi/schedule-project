@@ -13,6 +13,10 @@ function App() {
         <Routes>
           <Route path="/" element={<CommonLayout page="index" />} />
           <Route path="/project" element={<CommonLayout page="project" />} />
+          <Route
+            path="/project/:id"
+            element={<CommonLayout page="projectDetail" />}
+          />
           <Route path="/mypage" element={<CommonLayout page="mypage" />} />
           <Route path="/write" element={<CommonLayout page="mypage" />} />
           <Route path="/signin" element={<SignLayout page="signin" />} />

@@ -7,6 +7,7 @@ import { useContext, useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { AuthContent } from "../Context/AuthProvider";
+import PostDetail from "../pages/PostDetail";
 
 //content분기 처리
 function Content({ page }) {
@@ -15,6 +16,8 @@ function Content({ page }) {
       return <Main />;
     case "project":
       return <Project />;
+    case "projectDetail":
+      return <PostDetail />;
     case "mypage":
       return <MyPage />;
   }

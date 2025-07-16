@@ -11,6 +11,8 @@ const ProjectListFilter = styled.section`
   justify-content: space-between;
   position: relative;
   margin-bottom: 16px;
+  fieldset {
+  }
 `;
 
 function Project() {
@@ -39,7 +41,6 @@ function Project() {
 
         const projectLists = await response.json();
         setPostList(projectLists);
-        setFilteredPostList(projectLists);
       } catch (error) {}
     };
     projectList();
@@ -47,7 +48,6 @@ function Project() {
   return (
     <section className="container">
       <h2 className="text-ir">프로젝트</h2>
-
       <ProjectListFilter>
         <CustomnSelectBox
           lists={lists}
@@ -62,7 +62,7 @@ function Project() {
       </ProjectListFilter>
       <ul>
         {filteredPostList.map((e) => {
-          return <PrjoectList title={e.title} key={e.id} />;
+          return <PrjoectList dataInfo={e} key={e.id} />;
         })}
       </ul>
 
