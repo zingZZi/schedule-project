@@ -24,6 +24,7 @@ const AuthorInfo = styled.ul`
 `;
 
 function PrjoectList({ dataInfo }) {
+  console.log(dataInfo);
   return (
     <List>
       <Link to={dataInfo.id}>

@@ -14,7 +14,7 @@ function App() {
           <Route path="/" element={<CommonLayout page="index" />} />
           <Route path="/project" element={<CommonLayout page="project" />} />
           <Route
-            path="/project/:id"
+            path="/project/:postId"
             element={<CommonLayout page="projectDetail" />}
           />
           <Route path="/mypage" element={<CommonLayout page="mypage" />} />

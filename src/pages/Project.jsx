@@ -5,6 +5,11 @@ import { useSelectHook } from "../hooks/useSelectHook";
 import { useEffect, useMemo, useRef, useState } from "react";
 import PrjoectList from "../components/ProjectList";
 import SearchForm from "../components/SearchForm";
+const Section = styled.section`
+  max-width: 770px;
+  margin: 30px auto 0;
+`;
+
 const ProjectListFilter = styled.section`
   display: flex;
   align-items: center;
@@ -46,7 +51,7 @@ function Project() {
     projectList();
   }, []);
   return (
-    <section className="container">
+    <Section>
       <h2 className="text-ir">프로젝트</h2>
       <ProjectListFilter>
         <CustomnSelectBox
@@ -67,7 +72,7 @@ function Project() {
       </ul>
 
       <PageNav />
-    </section>
+    </Section>
   );
 }
 

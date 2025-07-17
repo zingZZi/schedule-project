@@ -3,9 +3,8 @@ import Footer from "../components/Footer";
 import Main from "../pages/Main";
 import Project from "../pages/Project";
 import MyPage from "../pages/MyPage";
-import { useContext, useEffect, useState } from "react";
-import { Navigate, useLocation } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
+import { useContext, useEffect } from "react";
+import { Navigate } from "react-router-dom";
 import { AuthContent } from "../Context/AuthProvider";
 import PostDetail from "../pages/PostDetail";
 
