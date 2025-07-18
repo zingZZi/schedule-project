@@ -292,7 +292,7 @@
       "authorId": "user_002",
       "hasProfileImage": true,
       "date": "2025.01.12",
-      "category": "프론트 개발",
+      "category": "프론트엔드",
       "content": "React 렌더링 최적화 및 코드 스플리팅을 통해 페이지 로딩 속도를 향상시킨 방법을 공유합니다."
     },
     {
@@ -312,7 +312,7 @@
       "authorId": "user_004",
       "hasProfileImage": true,
       "date": "2025.01.15",
-      "category": "백 개발",
+      "category": "백엔드",
       "content": "백엔드와 프론트 간 협업을 위한 API 명세서 작성 규칙과 예시를 정리했습니다."
     },
     {
@@ -332,7 +332,7 @@
       "authorId": "user_006",
       "hasProfileImage": true,
       "date": "2025.01.18",
-      "category": "프론트 개발",
+      "category": "프론트엔드",
       "content": "React에서 자주 사용하는 커스텀 훅 패턴들을 정리하여 공유합니다."
     },
     {
@@ -352,7 +352,7 @@
       "authorId": "user_008",
       "hasProfileImage": true,
       "date": "2025.01.21",
-      "category": "백 개발",
+      "category": "백엔드",
       "content": "데이터 중복 최소화 및 조회 성능 향상을 위한 DB 스키마 개선안을 정리했습니다."
     },
     {
@@ -372,7 +372,7 @@
       "authorId": "user_002",
       "hasProfileImage": true,
       "date": "2025.01.25",
-      "category": "프론트 개발",
+      "category": "프론트엔드",
       "content": "시각/지체 장애인을 위한 웹 접근성 표준 및 실천 가이드를 정리했습니다."
     },
     {
@@ -392,7 +392,7 @@
       "authorId": "user_004",
       "hasProfileImage": true,
       "date": "2025.01.28",
-      "category": "백 개발",
+      "category": "백엔드",
       "content": "JWT 토큰 갱신 로직 및 로그인 세션 정책 변경에 대한 논의 내용을 정리한 회의록입니다."
     },
     {
@@ -412,7 +412,7 @@
       "authorId": "user_006",
       "hasProfileImage": true,
       "date": "2025.01.30",
-      "category": "프론트 개발",
+      "category": "프론트엔드",
       "content": "사내에서 통일된 스타일로 코드 작성이 가능하도록 코드 컨벤션을 문서화했습니다."
     },
     {
@@ -432,7 +432,7 @@
       "authorId": "user_008",
       "hasProfileImage": true,
       "date": "2025.02.02",
-      "category": "백 개발",
+      "category": "백엔드",
       "content": "세션 저장소 개선을 위해 Redis를 도입할 경우의 이점과 고려 사항을 정리했습니다."
     },
     {
@@ -452,7 +452,7 @@
       "authorId": "user_002",
       "hasProfileImage": true,
       "date": "2025.02.04",
-      "category": "프론트 개발",
+      "category": "프론트엔드",
       "content": "Jest와 Testing Library를 활용해 프론트엔드 테스트 코드를 작성하는 방법을 문서화했습니다."
     },
     {
@@ -472,7 +472,7 @@
       "authorId": "user_004",
       "hasProfileImage": true,
       "date": "2025.02.06",
-      "category": "백 개발",
+      "category": "백엔드",
       "content": "로그인 API 오류 발생 시 대응한 프로세스와 로그 분석 결과를 공유합니다."
     }
   ]

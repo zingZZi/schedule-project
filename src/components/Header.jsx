@@ -23,7 +23,7 @@ const HeaderNav = styled.div`
   gap: 48px;
 `;
 const HeaderLogo = styled.h1`
-  width: 130px;
+  width: 108px;
 `;
 
 const NavElem = styled.nav`

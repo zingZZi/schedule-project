@@ -6,7 +6,8 @@ const Btn = styled.button`
   width: 40px;
   height: 40px;
 `;
-function PageNav() {
+function PageNav({pageNavTotalNum}) {
+  //console.log(pageNavTotalNum)
   return (
     <PageNation>
       <Btn>이전페이지 이동</Btn>

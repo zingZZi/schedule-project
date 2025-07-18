@@ -1,17 +1,45 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
 const PostDetailWrap = styled.section`
   max-width: 744px;
-  margin: 0 auto;
+  margin: 30px auto 0;
+  .category {
+    font-size: 1.6rem;
+  }
 `;
-const PostContent = styled.div``;
+const PostTitle = styled.h2`
+  font-weight: 900;
+  font-size: 2rem;
+  line-height: 3rem;
+  margin: 4px 0 16px;
+`;
+const PostInfo = styled.ul`
+  display: flex;
+  gap: 8px;
+`;
+const PostContent = styled.div`
+  margin-top: 40px;
+  min-height: 340px;
+`;
+
+const PostBtns = styled.section`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+  padding-top: 21px;
+  border-top: 1px solid var(--white-color-500);
+`;
 
 export default function PostDetail() {
   const [postData, setPostData] = useState({});
   const postId = useParams().postId;
-  async function post() {
+  
+
+  useEffect(() => {
+    async function post() {
     try {
       const response = await fetch(`http://localhost:3000/posts/${postId}`);
       const postData = await response.json();
@@ -19,22 +47,33 @@ export default function PostDetail() {
         console.log("서버통신오류");
       }
       setPostData(postData);
-      console.log(postData);
     } catch (error) {}
   }
-  useEffect(() => {
     post();
   }, []);
   return (
     <PostDetailWrap>
-      <b>{postData.category}</b>
-      <h2>{postData.title}</h2>
-      <p>
-        <span>{postData.date}</span>
-        <span>{postData.author}</span>
-      </p>
+      <b className="category">{postData.category}</b>
+      <PostTitle>{postData.title}</PostTitle>
+      <PostInfo>
+        <li>{postData.date}</li>
+        <li>{postData.author}</li>
+      </PostInfo>
 
       <PostContent>{postData.content}</PostContent>
+
+      <PostBtns>
+        <div>
+          <button>이전</button>
+          <button>다음</button>
+        </div>
+
+        <div>
+          <button>수정</button>
+          <button>삭제</button>
+          <button>목록</button>
+        </div>
+      </PostBtns>
     </PostDetailWrap>
   );
 }
