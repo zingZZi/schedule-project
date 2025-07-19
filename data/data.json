@@ -278,8 +278,8 @@
     {
       "id": 1,
       "title": "기획 초기 아이디어 정리 회의록",
-      "author": "김민준",
-      "authorId": "user_001",
+      "author": "테스트",
+      "authorId": "user_021",
       "hasProfileImage": true,
       "date": "2025.01.10",
       "category": "기획",
@@ -468,8 +468,8 @@
     {
       "id": 20,
       "title": "로그인 API 오류 대응 사례",
-      "author": "정수빈",
-      "authorId": "user_004",
+      "author": "테스트",
+      "authorId": "user_021",
       "hasProfileImage": true,
       "date": "2025.02.06",
       "category": "백엔드",
