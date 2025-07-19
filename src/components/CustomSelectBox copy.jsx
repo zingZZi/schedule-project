@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import { useSelectHook } from "../hooks/useSelectHook";
-import React, { memo } from "react";
 
 const SelectBox = styled.div`
   position: relative;
@@ -37,15 +35,15 @@ const CustomDropDown = styled.ul`
     }
   }
 `;
-function CustomnSelectBox({type,defaultText,lists,onChange}) {
 
-  const { toggle, isOpen, selectedText, listSelect, componentRef } =
-    useSelectHook({
-      type,
-      defaultText,
-      onChange
-    });
-    
+function CustomnSelectBox({
+  lists,
+  toggle,
+  isOpen,
+  selectedText,
+  listSelect,
+  componentRef,
+}) {
   return (
     <SelectBox ref={componentRef}>
       <SlectedText onClick={toggle} type="button">
@@ -71,4 +69,4 @@ function CustomnSelectBox({type,defaultText,lists,onChange}) {
   );
 }
 
-export default React.memo(CustomnSelectBox);
+export default CustomnSelectBox;

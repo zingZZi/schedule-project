@@ -6,14 +6,16 @@ const Btn = styled.button`
   width: 40px;
   height: 40px;
 `;
-function PageNav({pageNavTotalNum}) {
-  //console.log(pageNavTotalNum)
+function PageNav({PageNum,currentPage,setCurrentPage}) {
+  console.log(currentPage)
   return (
     <PageNation>
       <Btn>이전페이지 이동</Btn>
-      <Btn>1</Btn>
-      <Btn>2</Btn>
-      <Btn>3</Btn>
+      {Array.from({ length: PageNum }, (_, index) => (
+        <Btn key={index} className={currentPage===index?'on':null} onClick={()=>{setCurrentPage(index)}}>
+          {index + 1}
+        </Btn>
+      ))}
       <Btn>다음페이지 이동</Btn>
     </PageNation>
   );

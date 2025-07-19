@@ -1,12 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
-export function useSelectHook({ type, defaultText,onChange }) {
+export function useSelectHook({ type, defaultText }) {
   const componentRef = useRef("null");
   let [isOpen, setIsOpen] = useState(false);
   const [selectedText, setSelectedText] = useState(defaultText);
-  const [bb,setbb] = useState(false)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     function outStideClick(e) {
       if (componentRef.current && !componentRef.current.contains(e.target)) {
         setIsOpen(false);
@@ -25,14 +24,15 @@ export function useSelectHook({ type, defaultText,onChange }) {
   const listSelect = (e) => {
     if(selectedText !== e.target.dataset.list){
       setSelectedText(e.target.dataset.list);
-      onChange?.(e.target.dataset.list); 
     }
     setIsOpen(!isOpen);
+    if (type === "filter") {
+      //여기서 useMemo로 저장된 type별로 데이터 정리해줘야하는거아님?
+      return;
+    } else {
+      console.log(slect);
+    }
   };
-
-  useEffect(()=>{
-
-  })
 
   return {
     toggle,
