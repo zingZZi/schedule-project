@@ -22,7 +22,7 @@ export function useSelectHook({ type, defaultText }) {
   };
 
   const listSelect = (e) => {
-    if(selectedText !== e.target.dataset.list){
+    if (selectedText !== e.target.dataset.list) {
       setSelectedText(e.target.dataset.list);
     }
     setIsOpen(!isOpen);

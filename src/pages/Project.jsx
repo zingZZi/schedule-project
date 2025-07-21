@@ -46,36 +46,39 @@ function Project() {
     projectList();
   }, []);
 
-  const filteredPostList = useMemo(() => {
-    //카테고리별 리스트 필터링기능
-    const lists =
-      changeFilter === "" || changeFilter === "전체"
-        ? postList
-        : postList.filter((e) => e.category === changeFilter);
+  //필터링 리스트
+  const filteredList = useMemo(() => {
+    let filteredResults = [...postList];
+    //카테고리 필터링 리스트
+    if (changeFilter === "" || changeFilter === "전체") {
+      filteredResults = [...postList];
+    } else {
+      filteredResults = filteredResults.filter(
+        (e) => e.category === changeFilter
+      );
+    }
+    console.log(searchKeyword);
+    //검색 필터링 리스트
+    if (searchKeyword) {
+      filteredResults = filteredResults.filter(
+        (e) =>
+          e.title.includes(searchKeyword) || e.author.includes(searchKeyword)
+      );
+    }
 
-    return lists;
-  }, [postList, changeFilter]);
+    return filteredResults;
+  }, [postList, changeFilter, searchKeyword]);
 
-  const keyWordCheckList = useMemo(() => {
-    const lists = !searchKeyword
-      ? filteredPostList
-      : filteredPostList.filter(
-          (e) =>
-            e.title.includes(searchKeyword) || e.author.includes(searchKeyword)
-        );
+  const ProjectList = useMemo(() => {
     const start = currentPage * POST_LIST_COUNT;
     const end = currentPage + start + POST_LIST_COUNT;
-    return lists.slice(start, end);
-  }, [filteredPostList, searchKeyword, currentPage]);
+    return filteredList.slice(start, end);
+  }, [postList, changeFilter, searchKeyword]);
 
   const PageNum = useMemo(() => {
-    const count =
-      changeFilter === "" || changeFilter === "전체"
-        ? postList.length / POST_LIST_COUNT
-        : postList.filter((e) => e.category === changeFilter).length /
-          POST_LIST_COUNT;
+    const count = filteredList.length / POST_LIST_COUNT;
     return Math.ceil(count);
-  }, [filteredPostList, keyWordCheckList, postList]);
+  }, [postList, changeFilter, searchKeyword]);
 
   return (
     <Section>
@@ -95,8 +98,8 @@ function Project() {
       </ProjectListFilter>
 
       <ul>
-        {keyWordCheckList.length > 0 ? (
-          keyWordCheckList.map((e) => {
+        {ProjectList.length > 0 ? (
+          ProjectList.map((e) => {
             return <PrjoectList dataInfo={e} key={e.id} />;
           })
         ) : (
