@@ -45,11 +45,11 @@ const FieldElem = styled.form`
   }
 `;
 
-function SearchForm() {
+function SearchForm({setSearchKeyword}) {
   //검색폼관련 기능
   const seachRef = useRef("null");
   const [formBtnState, setFormBtnState] = useState("button");
-  const [inpTxt, setInpTxt] = useState("");
+  let serachInuptValue = useRef('')
   //버튼 기능설정
   const formBtnFnc = (e) => {
     if (e.target.type === "button") {
@@ -72,7 +72,8 @@ function SearchForm() {
 
   function seachSubmit(e) {
     e.preventDefault();
-    console.log(inpTxt);
+    let searchInputData = serachInuptValue.current.value;
+    setSearchKeyword(searchInputData)
   }
 
   return (
@@ -86,10 +87,7 @@ function SearchForm() {
         <input
           type="text"
           placeholder="제목,작성자로 검색"
-          value={inpTxt}
-          onChange={(e) => {
-            setInpTxt(e.target.value);
-          }}
+          ref={serachInuptValue}
         />
       )}
       <BasicBtn type={formBtnState} className="text-ir" onClick={formBtnFnc}>

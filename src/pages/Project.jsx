@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import CustomnSelectBox from "../components/CustomSelectBox";
-import {  useEffect,useMemo,useState } from "react";
+import {  useEffect,useMemo,useRef,useState } from "react";
 import PrjoectList from "../components/ProjectList";
 import SearchForm from "../components/SearchForm";
 import PageNav from "../components/PageNav";
@@ -25,6 +25,7 @@ function Project() {
   const [postList, setPostList] = useState([]);
   const [changeFilter, setChangeFilter] = useState('');
   const [currentPage,setCurrentPage] = useState(0);
+  const [searchKeyword,setSearchKeyword] = useState('')
   const POST_LIST_COUNT = 8;
 
   //프로젝트 리스트 data 가져오기
@@ -46,7 +47,6 @@ function Project() {
   },[]);
 
   const filteredPostList = useMemo(()=>{
-
     //카테고리별 리스트 필터링기능
     const lists = 
     changeFilter===''|| changeFilter==='전체'
@@ -54,8 +54,8 @@ function Project() {
     :postList.filter((e)=>e.category === changeFilter)
     //페이지 갯수체크
     const start = currentPage * POST_LIST_COUNT;
-    const end = start + POST_LIST_COUNT;
-    return lists.slice(start,currentPage+end)
+    const end = currentPage+start + POST_LIST_COUNT;
+    return lists.slice(start,end)
   },[postList,changeFilter,currentPage]);
 
   const PageNum = useMemo(()=>{
@@ -65,7 +65,10 @@ function Project() {
     return Math.round(count)
   },[filteredPostList,postList])
 
-  
+  const keyWordCheckList = useMemo(()=>{
+    return filteredPostList.filter((e)=>e.title.includes(searchKeyword))
+  },[searchKeyword]);
+  console.log(keyWordCheckList)
   return (
     <Section>
       <h2 className="text-ir">프로젝트 페이지</h2>
@@ -80,7 +83,7 @@ function Project() {
           setCurrentPage(0)
         }}
       />
-        <SearchForm />
+        <SearchForm setSearchKeyword={setSearchKeyword}/>
       </ProjectListFilter>
       
       <ul>
