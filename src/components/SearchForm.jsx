@@ -72,7 +72,7 @@ function SearchForm({setSearchKeyword}) {
 
   function seachSubmit(e) {
     e.preventDefault();
-    let searchInputData = serachInuptValue.current.value;
+    let searchInputData = serachInuptValue.current.value.trim();
     setSearchKeyword(searchInputData)
   }
 
