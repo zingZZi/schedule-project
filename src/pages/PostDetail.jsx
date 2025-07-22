@@ -1,5 +1,5 @@
 import { useContext, useEffect, useLayoutEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { AuthContent } from "../Context/AuthProvider";
 
@@ -36,10 +36,8 @@ const PostBtns = styled.section`
 
 export default function PostDetail() {
   const [postData, setPostData] = useState({});
-  const postId = useParams().postId;
+  const postId = Math.floor(useParams().postId);
   const { user } = useContext(AuthContent);
-  console.log(user.userId);
-  console.log(postData.authorId);
   useEffect(() => {
     async function post() {
       try {
@@ -52,7 +50,7 @@ export default function PostDetail() {
       } catch (error) {}
     }
     post();
-  }, []);
+  }, [postId]);
   return (
     <PostDetailWrap>
       <b className="category">{postData.category}</b>
@@ -66,8 +64,13 @@ export default function PostDetail() {
 
       <PostBtns>
         <div>
-          <button>이전</button>
-          <button>다음</button>
+          <Link
+            to={`/project/${postId - 1}`}
+            className={postId == 1 ? "disabled" : null}
+          >
+            이전
+          </Link>
+          <Link to={`/project/${postId + 1}`}>다음</Link>
         </div>
 
         <div>
