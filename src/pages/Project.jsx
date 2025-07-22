@@ -67,18 +67,18 @@ function Project() {
     }
 
     return filteredResults;
-  }, [postList, changeFilter, searchKeyword]);
+  }, [postList, currentPage, changeFilter, searchKeyword]);
 
   const ProjectList = useMemo(() => {
     const start = currentPage * POST_LIST_COUNT;
     const end = currentPage + start + POST_LIST_COUNT;
     return filteredList.slice(start, end);
-  }, [postList, changeFilter, searchKeyword]);
+  }, [postList, currentPage, changeFilter, searchKeyword]);
 
   const PageNum = useMemo(() => {
     const count = filteredList.length / POST_LIST_COUNT;
     return Math.ceil(count);
-  }, [postList, changeFilter, searchKeyword]);
+  }, [postList, currentPage, changeFilter, searchKeyword]);
 
   return (
     <Section>

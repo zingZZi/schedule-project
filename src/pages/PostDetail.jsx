@@ -1,6 +1,7 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useContext, useEffect, useLayoutEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import { AuthContent } from "../Context/AuthProvider";
 
 const PostDetailWrap = styled.section`
   max-width: 744px;
@@ -36,19 +37,20 @@ const PostBtns = styled.section`
 export default function PostDetail() {
   const [postData, setPostData] = useState({});
   const postId = useParams().postId;
-  
-
+  const { user } = useContext(AuthContent);
+  console.log(user.userId);
+  console.log(postData.authorId);
   useEffect(() => {
     async function post() {
-    try {
-      const response = await fetch(`http://localhost:3000/posts/${postId}`);
-      const postData = await response.json();
-      if (!response.ok) {
-        console.log("서버통신오류");
-      }
-      setPostData(postData);
-    } catch (error) {}
-  }
+      try {
+        const response = await fetch(`http://localhost:3000/posts/${postId}`);
+        const postData = await response.json();
+        if (!response.ok) {
+          console.log("서버통신오류");
+        }
+        setPostData(postData);
+      } catch (error) {}
+    }
     post();
   }, []);
   return (
@@ -69,8 +71,12 @@ export default function PostDetail() {
         </div>
 
         <div>
-          <button>수정</button>
-          <button>삭제</button>
+          {user.userId === postData.authorId ? (
+            <>
+              <button>수정</button>
+              <button>삭제</button>
+            </>
+          ) : null}
           <button>목록</button>
         </div>
       </PostBtns>
