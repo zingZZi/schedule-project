@@ -23,10 +23,10 @@ const AuthorInfo = styled.ul`
   }
 `;
 
-function PrjoectList({ dataInfo }) {
+function PrjoectList({ dataInfo, index }) {
   return (
     <List>
-      <Link to={dataInfo.id}>
+      <Link to={dataInfo.id} state={{ index }}>
         <span>[{dataInfo.category}]</span>
         <p>{dataInfo.title}</p>
       </Link>

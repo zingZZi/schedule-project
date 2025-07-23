@@ -23,7 +23,7 @@ const Btn = styled.button`
     font-weight: bold;
   }
 `;
-function PageNav({ PageNum, currentPage, setCurrentPage }) {
+function PageNav({ PageNum, currentPage, setCurrentPage, handlePageChange }) {
   return (
     <PageNation>
       <Btn disabled={currentPage == 0}>이전</Btn>
@@ -32,7 +32,7 @@ function PageNav({ PageNum, currentPage, setCurrentPage }) {
           key={index}
           className={currentPage === index ? "on" : null}
           onClick={() => {
-            setCurrentPage(index);
+            handlePageChange(index);
           }}
         >
           {index + 1}

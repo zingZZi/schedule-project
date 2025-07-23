@@ -80,7 +80,7 @@ export default function PostDetail() {
               <button>삭제</button>
             </>
           ) : null}
-          <button>목록</button>
+          <Link to="/project">목록</Link>
         </div>
       </PostBtns>
     </PostDetailWrap>

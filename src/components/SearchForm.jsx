@@ -45,7 +45,7 @@ const FieldElem = styled.form`
   }
 `;
 
-function SearchForm({ setSearchKeyword }) {
+function SearchForm({ setSearchKeyword, handleSearchChange }) {
   //검색폼관련 기능
   const seachRef = useRef("null");
   const [formBtnState, setFormBtnState] = useState("button");
@@ -73,6 +73,8 @@ function SearchForm({ setSearchKeyword }) {
   function seachSubmit(e) {
     e.preventDefault();
     let searchInputData = serachInuptValue.current.value.trim();
+
+    handleSearchChange(searchInputData);
     setSearchKeyword(searchInputData);
   }
 
