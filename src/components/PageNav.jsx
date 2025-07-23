@@ -23,14 +23,14 @@ const Btn = styled.button`
     font-weight: bold;
   }
 `;
-function PageNav({ PageNum, currentPage, setCurrentPage, handlePageChange }) {
+function PageNav({ PageNum, page, handlePageChange }) {
   return (
     <PageNation>
-      <Btn disabled={currentPage == 0}>이전</Btn>
+      <Btn disabled={page == 1}>이전</Btn>
       {Array.from({ length: PageNum }, (_, index) => (
         <Btn
           key={index}
-          className={currentPage === index ? "on" : null}
+          className={page - 1 === index ? "on" : null}
           onClick={() => {
             handlePageChange(index);
           }}
@@ -38,7 +38,7 @@ function PageNav({ PageNum, currentPage, setCurrentPage, handlePageChange }) {
           {index + 1}
         </Btn>
       ))}
-      <Btn disabled={currentPage === PageNum - 1}>다음</Btn>
+      <Btn disabled={page === PageNum}>다음</Btn>
     </PageNation>
   );
 }

@@ -7,94 +7,76 @@ const FieldElem = styled.form`
   align-items: center;
   gap: 12px;
   position: relative;
-  &.submit-form {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+
+  section {
+    display: flex;
+    gap: 8px;
+    position: relative;
     input {
-      width: 100%;
       border: 1px solid var(--white-color-500);
+      border-radius: 30px;
+      width: 300px;
       height: 40px;
-      padding: 0 22px;
-      border-radius: 40px;
+      padding: 0 40px 0 20px;
     }
     button {
       position: absolute;
-      right: 15px;
-      top: 5px;
-      width: 29px;
-      height: 29px;
-      border: none;
+      border: 1px solid transparent;
       background: pink;
+      right: 6px;
+      top: 4px;
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      border-radius: 50%;
     }
   }
-  a {
-    background-color: var(--white-color-100);
-    border: 1px solid var(--primary-color);
-    padding: 0 34px;
-    line-height: 32px;
-    border-radius: 24px;
-    color: var(--primary-color);
-  }
-  button {
-    min-width: 32px;
-    height: 32px;
-    padding: 0;
-    border-radius: 50%;
+
+  .write-btn {
+    background-color: var(--primary-color);
+    border-radius: 4px;
+    width: 38px;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
   }
 `;
 
-function SearchForm({ setSearchKeyword, handleSearchChange }) {
+function SearchForm({ handleSearchChange, keyword }) {
   //검색폼관련 기능
-  const seachRef = useRef("null");
-  const [formBtnState, setFormBtnState] = useState("button");
-  let serachInuptValue = useRef("");
-  //버튼 기능설정
-  const formBtnFnc = (e) => {
-    if (e.target.type === "button") {
-      e.preventDefault();
-      setFormBtnState("submit");
-    }
-  };
-  //
-  useEffect(() => {
-    function InputCloseFnc(e) {
-      if (
-        seachRef.current.classList.contains("submit-form") &&
-        !seachRef.current.contains(e.target)
-      ) {
-        setFormBtnState("button");
-      }
-    }
-    document.addEventListener("mousedown", InputCloseFnc);
-  }, []);
+  const [inputData, setInputData] = useState(keyword);
 
   function seachSubmit(e) {
     e.preventDefault();
-    let searchInputData = serachInuptValue.current.value.trim();
+    let searchInputData = inputData.trim();
 
     handleSearchChange(searchInputData);
-    setSearchKeyword(searchInputData);
+  }
+  function inputHandler(e) {
+    setInputData(e.target.value);
+  }
+  function searchReset() {
+    setInputData("");
+    handleSearchChange("");
   }
 
   return (
-    <FieldElem
-      onSubmit={seachSubmit}
-      ref={seachRef}
-      className={formBtnState === "submit" ? "submit-form" : null}
-    >
-      {formBtnState === "button" ? <Link to="/write">작성하기</Link> : null}
-      {formBtnState === "button" ? null : (
+    <FieldElem onSubmit={seachSubmit}>
+      <section>
+        <h3 className="text-ir">검색영역</h3>
         <input
           type="text"
           placeholder="제목,작성자로 검색"
-          ref={serachInuptValue}
+          value={inputData}
+          onChange={inputHandler}
         />
-      )}
-      <BasicBtn type={formBtnState} className="text-ir" onClick={formBtnFnc}>
-        검색
-      </BasicBtn>
+        <BasicBtn className="text-ir" type="button" onClick={searchReset}>
+          검색리셋버튼
+        </BasicBtn>
+      </section>
+      <Link to="/write" className="write-btn">
+        ✏️
+      </Link>
     </FieldElem>
   );
 }

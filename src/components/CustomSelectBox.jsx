@@ -26,6 +26,7 @@ const CustomDropDown = styled.ul`
     line-height: 2.4rem;
     padding: 4px 7px;
     margin-top: 2px;
+    cursor: pointer;
     &:first-child {
       margin-top: 0;
     }
@@ -37,15 +38,14 @@ const CustomDropDown = styled.ul`
     }
   }
 `;
-function CustomnSelectBox({type,defaultText,lists,onChange}) {
-
+function CustomnSelectBox({ type, defaultText, lists, onChange }) {
   const { toggle, isOpen, selectedText, listSelect, componentRef } =
     useSelectHook({
       type,
       defaultText,
-      onChange
+      onChange,
     });
-    
+
   return (
     <SelectBox ref={componentRef}>
       <SlectedText onClick={toggle} type="button">

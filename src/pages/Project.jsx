@@ -55,9 +55,6 @@ function Project() {
 
   //커스텀 탭 관련 정보
   const [postList, setPostList] = useState([]);
-  const [changeFilter, setChangeFilter] = useState("");
-  const [currentPage, setCurrentPage] = useState(0);
-  const [searchKeyword, setSearchKeyword] = useState("");
   const POST_LIST_COUNT = 8;
 
   //프로젝트 리스트 data 가져오기
@@ -98,8 +95,8 @@ function Project() {
   }, [postList, page, category, keyword]);
 
   const ProjectList = useMemo(() => {
-    const start = currentPage * POST_LIST_COUNT;
-    const end = currentPage + start + POST_LIST_COUNT;
+    const start = (page - 1) * POST_LIST_COUNT;
+    const end = start + POST_LIST_COUNT;
     return filteredList.slice(start, end);
   }, [postList, page, category, keyword]);
 
@@ -121,10 +118,7 @@ function Project() {
             handleCategoryChange(value);
           }}
         />
-        <SearchForm
-          setSearchKeyword={setSearchKeyword}
-          handleSearchChange={handleSearchChange}
-        />
+        <SearchForm handleSearchChange={handleSearchChange} keyword={keyword} />
       </ProjectListFilter>
 
       <ul>
@@ -133,16 +127,16 @@ function Project() {
             return <PrjoectList dataInfo={e} key={e.id} index={i} />;
           })
         ) : (
-          <p>리스트없음</p>
+          <p className="no-list">리스트없음</p>
         )}
       </ul>
-
-      <PageNav
-        PageNum={PageNum}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        handlePageChange={handlePageChange}
-      />
+      {ProjectList.length > 0 ? (
+        <PageNav
+          PageNum={PageNum}
+          page={page}
+          handlePageChange={handlePageChange}
+        />
+      ) : null}
     </Section>
   );
 }

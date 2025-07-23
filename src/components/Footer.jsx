@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const FooterElem = styled.footer`
-  text-align: center;
+  padding: 120px 0 50px;
   p {
     color: var(--white-color-500);
   }
@@ -9,7 +9,9 @@ const FooterElem = styled.footer`
 function Footer() {
   return (
     <FooterElem>
-      <p>Timely Inc. All rights reserved. Powered by GitHub Pages.</p>
+      <p className="container">
+        Timely Inc. All rights reserved. Powered by GitHub Pages.
+      </p>
     </FooterElem>
   );
 }
