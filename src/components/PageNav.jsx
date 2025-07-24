@@ -26,7 +26,7 @@ const Btn = styled.button`
 function PageNav({ PageNum, page, handlePageChange }) {
   return (
     <PageNation>
-      <Btn disabled={page == 1}>이전</Btn>
+      {PageNum > 1 ? <Btn disabled={page == 1}>이전</Btn> : null}
       {Array.from({ length: PageNum }, (_, index) => (
         <Btn
           key={index}
@@ -38,7 +38,7 @@ function PageNav({ PageNum, page, handlePageChange }) {
           {index + 1}
         </Btn>
       ))}
-      <Btn disabled={page === PageNum}>다음</Btn>
+      {PageNum > 1 ? <Btn disabled={page === PageNum}>다음</Btn> : null}
     </PageNation>
   );
 }

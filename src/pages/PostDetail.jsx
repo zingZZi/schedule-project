@@ -1,5 +1,5 @@
 import { useContext, useEffect, useLayoutEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import { AuthContent } from "../Context/AuthProvider";
 
@@ -38,6 +38,8 @@ export default function PostDetail() {
   const [postData, setPostData] = useState({});
   const postId = Math.floor(useParams().postId);
   const { user } = useContext(AuthContent);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const urlParams = decodeURIComponent(searchParams.toString());
   useEffect(() => {
     async function post() {
       try {
@@ -64,13 +66,10 @@ export default function PostDetail() {
 
       <PostBtns>
         <div>
-          <Link
-            to={`/project/${postId - 1}`}
-            className={postId == 1 ? "disabled" : null}
-          >
+          <Link to="" className={postId == 1 ? "disabled" : null}>
             이전
           </Link>
-          <Link to={`/project/${postId + 1}`}>다음</Link>
+          <Link to="">다음</Link>
         </div>
 
         <div>
@@ -80,7 +79,7 @@ export default function PostDetail() {
               <button>삭제</button>
             </>
           ) : null}
-          <Link to="/project">목록</Link>
+          <Link to={`/project?${urlParams}`}>목록</Link>
         </div>
       </PostBtns>
     </PostDetailWrap>

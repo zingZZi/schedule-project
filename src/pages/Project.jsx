@@ -26,6 +26,7 @@ function Project() {
   const page = parseInt(searchParams.get("page") || "1", 10);
   const category = searchParams.get("category") || "전체";
   const keyword = searchParams.get("search") || "";
+  // TODO: page 값 (params값)이 유효하지 않을 때 처리 필요
 
   const handleCategoryChange = (newCategory) => {
     setSearchParams((prev) => {
@@ -124,7 +125,16 @@ function Project() {
       <ul>
         {ProjectList.length > 0 ? (
           ProjectList.map((e, i) => {
-            return <PrjoectList dataInfo={e} key={e.id} index={i} />;
+            return (
+              <PrjoectList
+                dataInfo={e}
+                key={e.id}
+                index={i}
+                page={page}
+                category={category}
+                keyword={keyword}
+              />
+            );
           })
         ) : (
           <p className="no-list">리스트없음</p>

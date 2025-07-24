@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { BasicBtn } from "../components/Button";
 import { useEffect, useRef, useState } from "react";
+import Icon from "../style/Icon.module.css";
 const FieldElem = styled.form`
   display: flex;
   align-items: center;
@@ -22,7 +23,7 @@ const FieldElem = styled.form`
     button {
       position: absolute;
       border: 1px solid transparent;
-      background: pink;
+      background: url(icon-delete.svg) no-repeat 50%;
       right: 6px;
       top: 4px;
       width: 32px;
@@ -38,13 +39,21 @@ const FieldElem = styled.form`
     width: 38px;
     height: 38px;
     line-height: 38px;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    span {
+      display: block;
+      width: 28px;
+      height: 28px;
+    }
   }
 `;
 
 function SearchForm({ handleSearchChange, keyword }) {
   //검색폼관련 기능
   const [inputData, setInputData] = useState(keyword);
+  const [resetBtn, setResetBtn] = useState(false);
 
   function seachSubmit(e) {
     e.preventDefault();
@@ -54,11 +63,22 @@ function SearchForm({ handleSearchChange, keyword }) {
   }
   function inputHandler(e) {
     setInputData(e.target.value);
+    if (inputData === "") {
+      setResetBtn(false);
+    } else {
+      setResetBtn(true);
+    }
   }
   function searchReset() {
     setInputData("");
     handleSearchChange("");
+    setResetBtn(false);
   }
+  useEffect(() => {
+    if (inputData) {
+      setResetBtn(true);
+    }
+  }, []);
 
   return (
     <FieldElem onSubmit={seachSubmit}>
@@ -70,12 +90,14 @@ function SearchForm({ handleSearchChange, keyword }) {
           value={inputData}
           onChange={inputHandler}
         />
-        <BasicBtn className="text-ir" type="button" onClick={searchReset}>
-          검색리셋버튼
-        </BasicBtn>
+        {resetBtn ? (
+          <BasicBtn className="text-ir" type="button" onClick={searchReset}>
+            검색리셋버튼
+          </BasicBtn>
+        ) : null}
       </section>
       <Link to="/write" className="write-btn">
-        ✏️
+        <span className={Icon["icon-write"]}></span>
       </Link>
     </FieldElem>
   );

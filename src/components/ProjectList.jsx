@@ -23,10 +23,15 @@ const AuthorInfo = styled.ul`
   }
 `;
 
-function PrjoectList({ dataInfo, index }) {
+function PrjoectList({ dataInfo, keyword, category, page }) {
   return (
     <List>
-      <Link to={dataInfo.id} state={{ index }}>
+      <Link
+        to={{
+          pathname: `/project/${dataInfo.id}`,
+          search: `?page=${page}&category=${category}&search=${keyword}`,
+        }}
+      >
         <span>[{dataInfo.category}]</span>
         <p>{dataInfo.title}</p>
       </Link>
