@@ -1,12 +1,17 @@
 import { useState } from "react";
 import { appAuth } from "../firebase/config";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { useDatabase } from "./useDatabase";
 
-export const useSignIn = () => {
+export const useSignUp = () => {
   const [isPendig, setIsPendig] = useState(false);
   const [error, setError] = useState(null);
+  const { addData } = useDatabase();
 
-  function login(email, password, displayName, teamId, positionId) {
+  function signUp(email, password, displayName, teamId, positionId) {
+    setIsPendig(true);
+    setError(null);
+    //firebase 통신
     createUserWithEmailAndPassword(appAuth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
@@ -18,11 +23,18 @@ export const useSignIn = () => {
           photoURL: "",
         })
           .then(() => {
-            // Profile updated!
-            // ...
+            setIsPendig(false);
+            setError(null);
+            addData("userInfo", {
+              uid: user.uid,
+              email,
+              displayName,
+              teamId,
+              positionId,
+            });
           })
           .catch((error) => {
-            setError(errorMessage);
+            setError(error.message);
           });
       })
       .catch((error) => {
@@ -31,5 +43,5 @@ export const useSignIn = () => {
       });
   }
 
-  return { login, isPendig, error };
+  return { signUp, isPendig, error };
 };

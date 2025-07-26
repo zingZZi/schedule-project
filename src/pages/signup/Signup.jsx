@@ -1,13 +1,14 @@
 import { PrimaryBtn } from "../../components/Button";
 import { useState } from "react";
 import { FromElem, InputWrap } from "../../commonStyle/signForm.style";
+import { useSignUp } from "../../hooks/useSignUp";
 function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [teamId, setTeamID] = useState("");
   const [positionId, setPositionId] = useState("");
-
+  const { signUp } = useSignUp();
   //form input data정보
   const handleData = (e) => {
     if (e.target.id === "email") {
@@ -26,6 +27,7 @@ function Signup() {
   //회원가입 function
   function signFrom(e) {
     e.preventDefault();
+    signUp(email, password, displayName, teamId, positionId);
   }
   return (
     <FromElem onSubmit={signFrom}>
