@@ -1,10 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 
-export function useSelectHook({ type, defaultText,onChange }) {
+export function useSelectHook({ type, defaultText, onChange }) {
   const componentRef = useRef("null");
   let [isOpen, setIsOpen] = useState(false);
   const [selectedText, setSelectedText] = useState(defaultText);
-  const [bb,setbb] = useState(false)
 
   useEffect(() => {
     function outStideClick(e) {
@@ -23,16 +22,14 @@ export function useSelectHook({ type, defaultText,onChange }) {
   };
 
   const listSelect = (e) => {
-    if(selectedText !== e.target.dataset.list){
+    if (selectedText !== e.target.dataset.list) {
       setSelectedText(e.target.dataset.list);
-      onChange?.(e.target.dataset.list); 
+      onChange?.(e.target.dataset.list);
     }
     setIsOpen(!isOpen);
   };
 
-  useEffect(()=>{
-
-  })
+  useEffect(() => {});
 
   return {
     toggle,
