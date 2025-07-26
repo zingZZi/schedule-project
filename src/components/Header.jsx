@@ -4,8 +4,6 @@ import { useContext, useState } from "react";
 import logo from "../assets/images/timely_logo_smoothed.svg";
 import userIcon from "../assets/images/basic-user-icon.svg";
 import { useActiveGnb } from "../hooks/useActiveGnb";
-import { useAuth } from "../hooks/useAuth";
-import { AuthContent } from "../Context/AuthProvider";
 
 const HeaderElem = styled.header`
   padding: 20px 0;
@@ -101,7 +99,6 @@ function Header() {
   const { location } = useActiveGnb();
 
   //login userData
-  const { user } = useContext(AuthContent);
   const [userInfoState, setUserInfoState] = useState(false);
   function openUserBox() {
     setUserInfoState(!userInfoState);
@@ -145,7 +142,7 @@ function Header() {
           className={userInfoState ? "active" : null}
         >
           <h2 className="text-ir">상단 회원정보</h2>
-          <UserInfo>
+          {/* <UserInfo>
             <img
               src={user.profileImage || userIcon}
               onError={(e) => {
@@ -159,7 +156,7 @@ function Header() {
                 <span className="email">{user.email}</span>
               ) : null}
             </p>
-          </UserInfo>
+          </UserInfo> */}
           {userInfoState ? (
             <LinkNav>
               <li>

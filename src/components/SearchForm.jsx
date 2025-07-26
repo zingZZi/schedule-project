@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { BasicBtn } from "../components/Button";
 import { useEffect, useRef, useState } from "react";
-import Icon from "../style/Icon.module.css";
 const FieldElem = styled.form`
   display: flex;
   align-items: center;
@@ -97,7 +96,7 @@ function SearchForm({ handleSearchChange, keyword }) {
         ) : null}
       </section>
       <Link to="/write" className="write-btn">
-        <span className={Icon["icon-write"]}></span>
+        <span></span>
       </Link>
     </FieldElem>
   );

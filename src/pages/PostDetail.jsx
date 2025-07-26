@@ -1,7 +1,6 @@
 import { useContext, useEffect, useLayoutEffect, useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
-import { AuthContent } from "../Context/AuthProvider";
 
 const PostDetailWrap = styled.section`
   max-width: 744px;

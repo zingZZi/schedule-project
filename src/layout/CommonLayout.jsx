@@ -3,9 +3,6 @@ import Footer from "../components/Footer";
 import Main from "../pages/Main";
 import Project from "../pages/Project";
 import MyPage from "../pages/MyPage";
-import { useContext, useEffect } from "react";
-import { Navigate } from "react-router-dom";
-import { AuthContent } from "../Context/AuthProvider";
 import PostDetail from "../pages/PostDetail";
 
 //content분기 처리
@@ -23,22 +20,6 @@ function Content({ page }) {
 }
 
 function CommonLayout({ page }) {
-  const { user } = useContext(AuthContent);
-  //처음 로딩시 activNav 설정;
-  useEffect(() => {
-    switch (location) {
-      case "":
-        return setActiveNav("index");
-      case "project":
-        return setActiveNav("project");
-      case "mypage":
-        return setActiveNav("mypage");
-    }
-  }, [location]);
-
-  if (!user) {
-    return <Navigate to="/signin" replace />;
-  }
   return (
     <>
       <Header />

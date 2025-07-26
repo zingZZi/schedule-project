@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import SignIn from "../pages/SignIn";
 import logo from "../assets/images/timely_logo_smoothed.svg";
 import Footer from "../components/Footer";
+import Signup from "../pages/signup/Signup";
+import SignIn from "../pages/signIn/SignIn";
 const SignWrap = styled.main`
   min-height: 100vh;
   margin: 0 auto;
@@ -28,6 +29,9 @@ function Content({ page }) {
     case "signin":
       return <SignIn />;
       break;
+    case "signup":
+      return <Signup />;
+      break;
     case "findpw":
       return <>비번찾기</>;
       break;
@@ -42,7 +46,6 @@ function SignLayout({ page }) {
         </LogoWrap>
         <Content page={page} />
       </SignFlexCenter>
-
       <Footer />
     </SignWrap>
   );
